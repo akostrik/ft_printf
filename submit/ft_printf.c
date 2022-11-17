@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/17 14:00:34 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/17 14:49:44 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <stdarg.h>
 
 // Une bibliothèque qui contient ft_printf(), imitant printf() originale
-// ar pour créer votre bibliothèque, libtool est interdite
 // Contrairement à printf(), ne pas gérer de buffer
 // %c caractère
 // %s chaîne (telle que définie par la convention C)
@@ -26,7 +25,6 @@
 // %X nombre en hexadécimal (base 16) avec des lettres majuscules
 // %% %
 // rendu : Makefile, *.h, */*.h, *.c, */*.c
-
 // malloc free write 
 // Libft autorisée
 /// void va_start(va_list ap, paramN) макрос инициализирует args для извлечения 

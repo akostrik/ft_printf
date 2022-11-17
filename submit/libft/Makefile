@@ -5,26 +5,28 @@
 #                                                     +:+ +:+         +:+      #
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/11/17 13:57:13 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/17 14:46:47 by akostrik         ###   ########.fr        #
+#    Created: 2022/11/17 14:47:52 by akostrik          #+#    #+#              #
+#    Updated: 2022/11/17 14:47:55 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# Le Makefile de votre projet doit compiler la librairie à l’aide de son 
-# Makefile, puis compiler le projet
-
-NAME    = libftprintf.a
-SRCS    = ft_printf.c
+NAME    = libft.a
+SRCS1   = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c 
+SRCS2   = ft_strlen.c ft_memset.c ft_bzero.c ft_memcpy.c ft_memmove.c ft_strlcpy.c
+SRCS3   = ft_strlcat.c ft_toupper.c ft_tolower.c ft_strchr.c ft_strrchr.c ft_strncmp.c 
+SRCS4   = ft_memchr.c ft_memcmp.c ft_strnstr.c ft_atoi.c ft_calloc.c ft_strdup.c
+SRCS5   = ft_substr.c ft_strjoin.c ft_strtrim.c ft_split.c ft_itoa.c ft_strmapi.c
+SRCS6   = ft_striteri.c ft_putchar_fd.c ft_putstr_fd.c ft_putendl_fd.c ft_putnbr_fd.c
+SRCS    = ${SRCS1} ${SRCS2} ${SRCS3} ${SRCS4} ${SRCS5} ${SRCS6}
 OBJS    = ${SRCS:.c=.o}
 HDRS    = .
 CFLAGS  = -Wall -Wextra -Werror
-LIBFT   = libft.a
-
-${NAME}: clean ${LIBFT} ${OBJS}
-	gcc -c ${CFLAGS} ${OBJS} -o ${NAME}
-	ar rc ${NAME} ${OBJS}
 
 all: ${NAME}
+
+${NAME}: clean ${OBJS} 
+	gcc -c ${CFLAGS} -I ${HDRS} ${OBJS} -o ${NAME}
+	ar rc ${NAME} ${OBJS}
 
 clean:
 	rm -f ${OBJS}
@@ -33,11 +35,5 @@ fclean: clean
 	rm -f ${NAME}
 
 re: fclean all
-
-${LIBFT}:
-	(cd ./libft && make) 
-	
-# make -f libft/Makefile # No rule to make target 'ft_isalpha.o'
-# (cd /libft && make) # cd: can't cd to /libft
 
 .PHONY: all clean fclean re
