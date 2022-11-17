@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <bsd/string.h>
 #include <errno.h>
-#include "submit/ft_printf.h"
+#include "submit/libftprintf.h"
 
 // Fichiers de rendu : Makefile, *.h, */*.h, *.c, */*.c
 // Fonctions externes autorisées : malloc free write va_start va_arg va_copy va_end
