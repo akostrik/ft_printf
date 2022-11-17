@@ -1,14 +1,14 @@
-NAME    = libft.a
-SRCS    = ft_isalpha.c
+NAME    = libftprintf.a
+SRCS    = ft_printf.c
 OBJS    = ${SRCS:.c=.o}
 HDRS    = .
 CFLAGS  = -Wall -Wextra -Werror
 
-all: ${NAME}
-
 ${NAME}: clean ${OBJS} 
 	gcc -c ${OBJS} -o ${NAME}
-	ar rc libft.a ${OBJS}
+	ar rc ${NAME} ${OBJS}
+
+all: ${NAME}
 
 clean:
 	rm -f ${OBJS}
