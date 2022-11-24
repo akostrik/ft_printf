@@ -1,20 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/17 16:00:39 by akostrik         ###   ########.fr       */
+/*   Created: 2022/11/07 14:21:18 by akostrik          #+#    #+#             */
+/*   Updated: 2022/11/18 15:29:54 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// Copies n bytes from memory area src to memory area dest 
+// The memory areas must not overlap
+// Returns a pointer to dest
+// ft_memcpy       : 1.OK 2.OK 
 
-#include "workspace/ft_printf.h"
+#include "libft.h"
 
-int main(void)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	printf("%c\n","P");
-	ft_printf("%c\n","R");
+	size_t	i;
+
+	i = 0;
+	while (i < n)
+	{
+		*((char *)dest + i) = *((char *)src + i);
+		i++;
+	}
+	return (dest);
 }

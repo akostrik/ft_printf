@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/17 16:00:39 by akostrik         ###   ########.fr       */
+/*   Created: 2022/11/07 14:21:18 by akostrik          #+#    #+#             */
+/*   Updated: 2022/11/18 15:31:39 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// Calculates the length of the string pointed to by s, 
+// excluding the terminating null byte ('\0')
+// Returns the number of bytes in the string pointed to by s
+// tester ft_strlen       : 1.OK 2.OK 
 
-#include "workspace/ft_printf.h"
+#include "libft.h"
 
-int main(void)
+size_t	ft_strlen(const char *str)
 {
-	printf("%c\n","P");
-	ft_printf("%c\n","R");
+	size_t	i;
+
+	if (str == NULL)
+		return (0);
+	i = 0;
+	while (str[i] != '\0')
+		i++;
+	return (i);
 }

@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_putstr_fd.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/17 16:00:39 by akostrik         ###   ########.fr       */
+/*   Created: 2022/11/16 15:10:20 by akostrik          #+#    #+#             */
+/*   Updated: 2022/11/18 18:26:46 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// s: La chaîne de caractères à écrire.
+// fd: Le descripteur de fichier sur lequel écrire.
+// fonctions autorisées : write
+// Écrit la chaîne de caractères ’s’ sur le descripteur de fichier donné.
 
-#include "workspace/ft_printf.h"
+//tester ft_putstr_fd    : 1.OK 
 
-int main(void)
+#include "libft.h"
+
+void	ft_putstr_fd(char *s, int fd)
 {
-	printf("%c\n","P");
-	ft_printf("%c\n","R");
+	size_t	i;
+
+	i = 0;
+	while (s[i] != '\0')
+		i++;
+	write(fd, s, i);
 }

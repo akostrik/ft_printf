@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_tolower.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/17 16:00:39 by akostrik         ###   ########.fr       */
+/*   Created: 2022/11/07 14:21:18 by akostrik          #+#    #+#             */
+/*   Updated: 2022/11/18 15:33:33 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+// ft_tolower      : 1.OK 2.OK 3.OK 4.OK 
 
-#include "workspace/ft_printf.h"
+#include "libft.h"
 
-int main(void)
+int	ft_tolower(int c)
 {
-	printf("%c\n","P");
-	ft_printf("%c\n","R");
+	if (c >= 'A' && c <= 'Z')
+		return (c - 'A' + 'a');
+	return (c);
 }
