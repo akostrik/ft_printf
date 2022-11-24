@@ -14,3 +14,6 @@ How to run:
 ```$ gcc main.c -L./submit/ -lftprintf```
 
 ```$ ./a.out```
+
+----------------------------------------------------------
+Tester https://github.com/Tripouille/printfTester 
