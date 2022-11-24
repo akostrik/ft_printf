@@ -11,7 +11,7 @@ How to run:
 
 ```$ cd ..```
 
-```$ gcc main.c -L./submit/ -lftprintf```
+```$ gcc main.c -L./workspace/ -lftprintf```
 
 ```$ ./a.out```
 
