@@ -6,15 +6,14 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/17 16:00:39 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:16:11 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
 
 #include "workspace/ft_printf.h"
 
 int main(void)
 {
-	printf("%c\n","P");
-	ft_printf("%c\n","R");
+	printf("* printf: %c\n",'P');
+	ft_printf("a%cb","R");
 }

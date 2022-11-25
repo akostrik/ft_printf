@@ -6,7 +6,7 @@
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 13:57:13 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/17 14:46:47 by akostrik         ###   ########.fr        #
+#    Updated: 2022/11/25 18:56:07 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,20 +19,23 @@ HDRS    = .
 CFLAGS  = -Wall -Wextra -Werror
 LIBFT   = libft.a
 
-${NAME}: clean ${LIBFT} ${OBJS}
+${NAME}: ${LIBFT} ${OBJS}
 	ar rc ${NAME} ${OBJS}
-	#	gcc -c ${CFLAGS} ${OBJS} -o ${NAME}
+#	gcc -c ${CFLAGS} -I ${HDRS} ${OBJS} -o ${NAME}
 
-.c.o:	gcc -c ${CFLAGS} -I ${HDRS} ${OBJS} -o ${NAME}
+#.c.o: gcc -c ${CFLAGS} -I ${HDRS} ${OBJS} -o ${NAME}
+
+%.o: %.c $(INCLUDE)
+	gcc -c $(CFLAGS) -o $@ $<
 
 all: ${NAME}
 
 clean:
-	rm -f ${OBJS}
+	rm -f ${OBJS} a.out
 	(cd ./libft && make clean)
 
 fclean: clean
-	rm -f ${NAME}
+	rm -f ${NAME} a.out
 	(cd ./libft && make fclean)
 
 re: fclean all

@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/17 17:05:07 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/25 19:16:34 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,15 +66,18 @@ int	ft_printf(const char *s, ...)
 	va_list args;
 	size_t	i;
 
-	printf("I have got %s : \n",s);
+	printf("I have got the line \"%s\" \n\n",s);
+	printf("the length of the string is %zu\n\n",ft_strlen((char *)s));
 	va_start(args, s); // указатель на первый элемент
 	i = 0;
 	while (i < ft_strlen((char *)s))
 	{
-		printf("%c\n",s[i]);
-		printf("%zu < %zu - 1 ?\n",i,ft_strlen((char *)s));
+		printf("%zu : %c\n",i,s[i]);
 		if (is_conversion(&s[i]) == 1)
+		{
 			printf("conversion %s\n",va_arg(args, char*));
+			i++;
+		}
 		i++;
 	}
 	va_end(args);
