@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/25 19:16:34 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/26 21:36:12 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,62 +24,80 @@
 // %X nombre en hexadécimal (base 16) avec des lettres majuscules
 // %% %
 // rendu : Makefile, *.h, */*.h, *.c, */*.c
-// malloc free write
-// Libft autorisée
-/// void va_start(va_list ap, paramN) макрос инициализирует args для извлечения
-// доп аргументов, которые идут после paramN. Параметр не должен быть register,
-// не может иметь типа массива или указателя на функцию
-/// void va_end(va_list ap) для нормального завершения работы, в паре с va_start
-/// va_arg макрос, получает указатель на первый аргумент и двигается
-/// void va_copy(va_list dest, va_list src) копирует src в dest, начиная с C++11
+// malloc free write libft
 // обязательный аргумент – первое переданное число, если его не передавать, то
 // не сможем найти адрес, по которому размещаются переменные в стеке
 
-static int	is_conversion(const char *str)
+// a pointer to any object type may be converted to void*
+// void* is useful in function parameters to allow passing values of any type
+// void* can't be dereferenced (it would give a value of type void)
+// void* : pointer arithmetic is not possible
+
+static char	*pointer_to_str(void *p)
 {
-	if (str[0] == '%')
+	size_t	i;
+	char	*str;
+
+	printf("\n\n&p      = %p\n",&p);
+	printf("*(&p)   = %p = %c\n",*(&p),*(char*)(*(&p)));
+	printf("*(&p+1) = %p = %c\n",*(&p+1),*(char*)(*(&p+1)));
+	printf("*(&p+2) = %p = %c\n",*(&p+2),*(char*)(*(&p+2)));
+	printf("*(&p+3) = %p = %c\n",*(&p+3),*(char*)(*(&p+3)));
+	printf("p       = %p = %c\n",p,*(char*)p);
+	printf("p+1     = %p = %c\n",p+1,*(char*)(p+1));
+	printf("p+2     = %p = %c\n",p+2,*(char*)(p+2));
+	printf("sizeof( p) = sizeof(%p) = %zu\n",p,sizeof(p));
+	printf("sizeof(&p) = sizeof(%p) = %zu\n",&p,sizeof(&p));
+	str = ft_calloc(14,1);
+	if (str == NULL)
+		return (NULL);
+// 0x 56 12 21 0d a0 08
+	str[0] = '0';
+	str[1] = 'x';
+	i = 2;
+	while (i < 14)
 	{
-		if (str[1] == 'c')
-			return (1);
-		if (str[1] == 's')
-			return (1);
-		if (str[1] == 'p')
-			return (1);
-		if (str[1] == 'd')
-			return (1);
-		if (str[1] == 'i')
-			return (1);
-		if (str[1] == 'u')
-			return (1);
-		if (str[1] == 'x')
-			return (1);
-		if (str[1] == 'X')
-			return (1);
-		if (str[1] == '%')
-			return (1);
+		// str[i] = *(char *)p;				BBBBBB
+		// str = (char *)(p + 1);			CD
+		//ft_memcpy(str+i, p+i-2, 1);	0xBCD
+		ft_memcpy(str+i, ((char*)p+i-2), 1);
+		i++;
 	}
-	return (0);
+	printf("\npointer_to_str returns %s\n",str);
+	return (str);
+}
+
+static void	ft_putpointer_fd(void *p, int fd)
+{
+	//if ( == NULL)
+	ft_putstr_fd(pointer_to_str(p), fd);
 }
 
 int	ft_printf(const char *s, ...)
 {
-	va_list args;
+	va_list list_args;
 	size_t	i;
 
-	printf("I have got the line \"%s\" \n\n",s);
-	printf("the length of the string is %zu\n\n",ft_strlen((char *)s));
-	va_start(args, s); // указатель на первый элемент
+	va_start(list_args, s);
 	i = 0;
 	while (i < ft_strlen((char *)s))
 	{
-		printf("%zu : %c\n",i,s[i]);
-		if (is_conversion(&s[i]) == 1)
+		if (ft_strncmp(&s[i],"%s",2) == 0)
+			ft_putstr_fd(va_arg(list_args, char*), 1);
+		else if (ft_strncmp(&s[i],"%c",2) == 0)
+			ft_putchar_fd(va_arg(list_args, int), 1);
+		else if (ft_strncmp(&s[i],"%d",2) == 0)
+			ft_putnbr_fd(va_arg(list_args, int), 1);
+		else if (ft_strncmp(&s[i],"%p",2) == 0)
+			ft_putpointer_fd(va_arg(list_args, void*), 1);
+		else
 		{
-			printf("conversion %s\n",va_arg(args, char*));
-			i++;
+			ft_putchar_fd(s[i], 1);
+			i--;
 		}
-		i++;
+		i += 2;
 	}
-	va_end(args);
+	va_end(list_args);
+	// free
 	return (1);
 }

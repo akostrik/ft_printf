@@ -6,7 +6,7 @@
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 13:57:13 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/25 18:56:07 by akostrik         ###   ########.fr        #
+#    Updated: 2022/11/26 20:45:17 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,22 +25,23 @@ ${NAME}: ${LIBFT} ${OBJS}
 
 #.c.o: gcc -c ${CFLAGS} -I ${HDRS} ${OBJS} -o ${NAME}
 
-%.o: %.c $(INCLUDE)
-	gcc -c $(CFLAGS) -o $@ $<
+%.o: %.c ${INCLUDE}
+	gcc -c ${CFLAGS} -o $@ $<
 
 all: ${NAME}
 
 clean:
 	rm -f ${OBJS} a.out
-	(cd ./libft && make clean)
+	(cd ../../01_libft/workspace && make clean)
 
 fclean: clean
 	rm -f ${NAME} a.out
-	(cd ./libft && make fclean)
+	(cd ../../01_libft/workspace && make fclean)
 
 re: fclean all
 
 ${LIBFT}:
-	(cd ./libft && make)
-
+#	(cd ./libft && make)
+	(cd ../../01_libft/workspace && make)
+	
 .PHONY: all clean fclean re
