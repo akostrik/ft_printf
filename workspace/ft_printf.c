@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/26 21:36:12 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/27 19:53:11 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,36 +33,36 @@
 // void* can't be dereferenced (it would give a value of type void)
 // void* : pointer arithmetic is not possible
 
+// 0x 56 12 21 0d a0 08
+
 static char	*pointer_to_str(void *p)
 {
-	size_t	i;
 	char	*str;
 
-	printf("\n\n&p      = %p\n",&p);
-	printf("*(&p)   = %p = %c\n",*(&p),*(char*)(*(&p)));
-	printf("*(&p+1) = %p = %c\n",*(&p+1),*(char*)(*(&p+1)));
-	printf("*(&p+2) = %p = %c\n",*(&p+2),*(char*)(*(&p+2)));
-	printf("*(&p+3) = %p = %c\n",*(&p+3),*(char*)(*(&p+3)));
-	printf("p       = %p = %c\n",p,*(char*)p);
-	printf("p+1     = %p = %c\n",p+1,*(char*)(p+1));
-	printf("p+2     = %p = %c\n",p+2,*(char*)(p+2));
+	printf("\n\n&p         = %p\n",&p);
+	printf("*(&p)      = %p = %c\n",*(&p),*(char*)(*(&p)));
+	printf("*(&p+1)    = %p = %c\n",*(&p+1),*(char*)(*(&p+1)));
+	printf("*(&p+2)    = %p = %c\n",*(&p+2),*(char*)(*(&p+2)));
+	printf("*(&p+3)    = %p = %c\n",*(&p+3),*(char*)(*(&p+3)));
+	printf("p          = %p = %c\n",p,*(char*)p);
+	printf("p+1        = %p = %c\n",p+1,*(char*)(p+1));
+	printf("p+2        = %p = %c\n",p+2,*(char*)(p+2));
 	printf("sizeof( p) = sizeof(%p) = %zu\n",p,sizeof(p));
 	printf("sizeof(&p) = sizeof(%p) = %zu\n",&p,sizeof(&p));
-	str = ft_calloc(14,1);
+	str = ft_calloc(14,1); // 16 ?
 	if (str == NULL)
 		return (NULL);
-// 0x 56 12 21 0d a0 08
 	str[0] = '0';
 	str[1] = 'x';
-	i = 2;
-	while (i < 14)
-	{
-		// str[i] = *(char *)p;				BBBBBB
-		// str = (char *)(p + 1);			CD
-		//ft_memcpy(str+i, p+i-2, 1);	0xBCD
-		ft_memcpy(str+i, ((char*)p+i-2), 1);
-		i++;
-	}
+	printf("%lx\n",(unsigned long)p & 0x00000000000f);
+	printf("%lx\n",(unsigned long)p & 0x0000000000f0);
+	printf("%lx\n",(unsigned long)p & 0x000000000f00);
+	printf("%lx\n",(unsigned long)(p > 3)& 0x00000000f000);
+	printf("%lx\n",(unsigned long)p & 0x0000000f0000);
+	printf("%lx\n",(unsigned long)p & 0x000000f00000);
+	printf("%lx\n",(unsigned long)p & 0x00000f000000);
+	printf("%lx\n",(unsigned long)p & 0x0000f0000000);
+	//ft_memcpy(str+2, (char*)p, 12);
 	printf("\npointer_to_str returns %s\n",str);
 	return (str);
 }
