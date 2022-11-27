@@ -1,5 +1,6 @@
 workspace/*.o
 workspace/libft.a
+workspace/libftprintf.a
 tester/*
 tester
 workspace/tester/*
@@ -7,3 +8,6 @@ workspace/tester
 workspace_to_submit
 workspace_to_submit/*
 a.out
+./a.out
+.vscode/*
+.vscode/
