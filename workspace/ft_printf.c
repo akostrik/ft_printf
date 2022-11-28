@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/27 19:53:11 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/28 19:05:42 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,33 +35,30 @@
 
 // 0x 56 12 21 0d a0 08
 
+/*static char	hex_digit_n_to_char(int n, void *p)
+{
+
+}*/
+
 static char	*pointer_to_str(void *p)
 {
 	char	*str;
 
-	printf("\n\n&p         = %p\n",&p);
-	printf("*(&p)      = %p = %c\n",*(&p),*(char*)(*(&p)));
-	printf("*(&p+1)    = %p = %c\n",*(&p+1),*(char*)(*(&p+1)));
-	printf("*(&p+2)    = %p = %c\n",*(&p+2),*(char*)(*(&p+2)));
-	printf("*(&p+3)    = %p = %c\n",*(&p+3),*(char*)(*(&p+3)));
-	printf("p          = %p = %c\n",p,*(char*)p);
-	printf("p+1        = %p = %c\n",p+1,*(char*)(p+1));
-	printf("p+2        = %p = %c\n",p+2,*(char*)(p+2));
+	printf("\np          = %p = %c\n",p,*(char*)p);
 	printf("sizeof( p) = sizeof(%p) = %zu\n",p,sizeof(p));
-	printf("sizeof(&p) = sizeof(%p) = %zu\n",&p,sizeof(&p));
 	str = ft_calloc(14,1); // 16 ?
 	if (str == NULL)
 		return (NULL);
 	str[0] = '0';
 	str[1] = 'x';
-	printf("%lx\n",(unsigned long)p & 0x00000000000f);
-	printf("%lx\n",(unsigned long)p & 0x0000000000f0);
-	printf("%lx\n",(unsigned long)p & 0x000000000f00);
-	printf("%lx\n",(unsigned long)(p > 3)& 0x00000000f000);
-	printf("%lx\n",(unsigned long)p & 0x0000000f0000);
-	printf("%lx\n",(unsigned long)p & 0x000000f00000);
-	printf("%lx\n",(unsigned long)p & 0x00000f000000);
-	printf("%lx\n",(unsigned long)p & 0x0000f0000000);
+	str[2] = ft_itoa(((unsigned long)p & 0x00000000000f))[0];
+	str[3] = ft_itoa(((unsigned long)p & 0x0000000000f0) >> 4)[0];
+	str[4] = ft_itoa(((unsigned long)p & 0x000000000f00) >> 8)[0];
+	str[5] = ft_itoa(((unsigned long)p & 0x00000000f000) >> 12)[0];
+	str[6] = ft_itoa(((unsigned long)p & 0x0000000f0000) >> 16)[0];
+	str[7] = ft_itoa(((unsigned long)p & 0x000000f00000) >> 20)[0];
+	str[8] = ft_itoa(((unsigned long)p & 0x00000f000000) >> 24)[0];
+	str[9] = ft_itoa(((unsigned long)p & 0x0000f0000000) >> 28)[0];
 	//ft_memcpy(str+2, (char*)p, 12);
 	printf("\npointer_to_str returns %s\n",str);
 	return (str);
