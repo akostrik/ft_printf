@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 21:30:39 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/29 23:48:07 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,18 +69,29 @@ static int is_conversion(const char *s)
 
 static ssize_t put_conversion(const char *s, va_list	list_args, int fd)
 {
+	size_t ret1;
+	size_t ret2;
+
 	if (ft_strncmp(s, "%s", 2) == 0)
 		return (putstr(va_arg(list_args, char *), fd));
 	if (ft_strncmp(s, "%c", 2) == 0)
 		return (putchar_(va_arg(list_args, int), fd));
 	if (ft_strncmp(s, "%p", 2) == 0)
-		return (put_pointer(va_arg(list_args, void *), fd));
+	{
+		ret1 = putstr("0x", fd);
+		if (ret1 == 1)
+			return (-1);
+		ret2 = put_uns_long_base((unsigned long)(va_arg(list_args, void *)),16,'x',fd);
+		if (ret2 == 1)
+			return (-1);
+		return (ret1 + ret2);
+	}
 	if (!ft_strncmp(s, "%d", 2) || !ft_strncmp(s, "%i", 2))
 		return (put_int_base_10(va_arg(list_args, int), fd));
 	if (ft_strncmp(s, "%u", 2) == 0)
-		return (put_unsigned_int_base(va_arg(list_args, unsigned int), 10, 1, fd));
+		return (put_uns_long_base(va_arg(list_args, unsigned int), 10, 1, fd));
 	if (!ft_strncmp(s, "%x", 2) || !ft_strncmp(s, "%X", 2))
-		return (put_unsigned_int_base(va_arg(list_args, unsigned int), 16, s[1], fd));
+		return (put_uns_long_base(va_arg(list_args, unsigned int), 16, s[1], fd));
 	if (ft_strncmp(s, "%%", 2) == 0)
 		return (putchar_('%', fd));
 	return (-1);
