@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   itoa_base16.c                                      :+:      :+:    :+:   */
+/*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:51:51 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 15:10:16 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/18 18:23:48 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,59 +18,79 @@
 // l’entier ’n’ reçu en argument
 // Les nombres négatifs doivent être gérés
 
-#include "ft_printf.h"
+#include "libft.h"
 
-static size_t	calculate_nb_bytes(unsigned int n)
+static size_t	calculate_nb_bytes_with_0(int n)
 {
 	size_t	i;
 
+	if (n == INT_MIN)
+		return (12);
+	if (n == 0)
+		return (2);
 	i = 0;
+	if (n < 0)
+	{
+		i = 1;
+		n = -n;
+	}
 	while (n > 0)
 	{
-		n = n / 16;
+		n = n / 10;
 		i++;
 	}
-	return (i);
+	return (i + 1);
 }
 
-static int	pow(unsigned int n, size_t k)
+static char	*str_0(char *str)
 {
-	size_t			i;
-	unsigned int	res;
-
-	i = 0;
-	res = 1;
-	while (i < k)
-	{
-		res *= n;
-		i++;
-	}
-	return (res);
+	str[0] = '0';
+	str[1] = '\0';
+	return (str);
 }
 
-void	put_int_base_16_fd(unsigned int n, int fd, char x)
+static char	*str_int_min(char *str)
 {
+	str[0] = '-';
+	str[1] = '2';
+	str[2] = '1';
+	str[3] = '4';
+	str[4] = '7';
+	str[5] = '4';
+	str[6] = '8';
+	str[7] = '3';
+	str[8] = '6';
+	str[9] = '4';
+	str[10] = '8';
+	str[11] = '\0';
+	return (str);
+}
+
+char	*ft_itoa(int n)
+{
+	char	*str;
 	size_t	i;
 	size_t	nb_bytes;
-	int			digit;
 
+	nb_bytes = calculate_nb_bytes_with_0(n);
+	str = (char *)malloc(nb_bytes * sizeof(char));
+	if (str == NULL)
+		return (NULL);
 	if (n == 0)
+		return (str_0(str));
+	if (n == INT_MIN)
+		return (str_int_min(str));
+	if (n < 0)
 	{
-		ft_putchar_fd('0', fd);
-		return ;
+		n = -n;
+		str[0] = '-';
 	}
-	nb_bytes = calculate_nb_bytes(n);
-	i = 0;
-	while (i < nb_bytes)
+	i = nb_bytes - 2;
+	while (n > 0)
 	{
-		digit = n / pow(16, nb_bytes - i - 1);
-		if (digit % 16 <= 9)
-			 ft_putchar_fd(digit % 16 + '0', 1);
-		else if(x == 'x')
-			ft_putchar_fd(digit % 16 - 10 + 'a', 1);
-		else if(x == 'X')
-			ft_putchar_fd(digit % 16 - 10 + 'A', 1);
-		n = n % pow(16, nb_bytes - i - 1);
-		i++;
+		str[i--] = n % 10 + '0';
+		n = n / 10;
 	}
+	str[nb_bytes - 1] = '\0';
+	return (str);
 }

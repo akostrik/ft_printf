@@ -1,22 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_printf.h                                        :+:      :+:    :+:   */
+/*   ft_putchar_fd.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/11/17 12:24:00 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 16:07:24 by akostrik         ###   ########.fr       */
+/*   Created: 2022/11/16 14:51:15 by akostrik          #+#    #+#             */
+/*   Updated: 2022/11/18 18:26:26 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_PRINTF_H
-# define FT_PRINTF_H
+// c: Le caractère à écrire
+// fd: Le descripteur de fichier sur lequel écrire
+// fonctions autorisées : write
+// Écrit le caractère ’c’ sur le descripteur de fichier donné
 
-# include <stdarg.h>
-# include "libft/libft.h"
+// tester ft_putchar_fd   : 1.OK 
 
-int		ft_printf(const char *str, ...);
-void	put_int_base_16_fd(unsigned int n, int fd, char x);
+#include "libft.h"
 
-#endif
+void	ft_putchar_fd(char c, int fd)
+{
+	write(fd, &c, 1);
+}
