@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:47:09 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/27 20:59:18 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/29 18:24:51 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -177,6 +177,5 @@ char	**ft_split(char const *s, char c)
 	if (tab == NULL)
 		return (NULL);
 	destroy_list(&list);
-	//free(list);
 	return (tab);
 }

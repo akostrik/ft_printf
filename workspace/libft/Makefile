@@ -6,7 +6,7 @@
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:32:35 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/25 18:43:17 by akostrik         ###   ########.fr        #
+#    Updated: 2022/11/29 19:10:46 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,17 +21,14 @@ SRCS   = ft_isalpha.c ft_isdigit.c ft_isalnum.c ft_isascii.c ft_isprint.c \
 OBJS    = ${SRCS:.c=.o}
 HDRS    = .
 CFLAGS  = -Wall -Wextra -Werror
+CC      = gcc
 
 all: ${NAME}
 
 ${NAME}: ${OBJS} 
-	ar rc ${NAME} ${OBJS}
-#	gcc -c ${CFLAGS} -I ${HDRS} ${OBJS} -o ${NAME}
-
-#.c.o: gcc -c ${CFLAGS} -I ${HDRS} ${OBJS} -o ${NAME}
 
 %.o: %.c 
-	gcc -c ${CFLAGS} -o $@ $<
+	${CC} -c ${CFLAGS} -o $@ $<
 
 clean:
 	rm -f ${OBJS} 
