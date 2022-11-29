@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 11:55:37 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/29 13:12:07 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,40 +35,54 @@
 
 static char	to_char(unsigned long pp)
 {
-	if (pp % 16 < 10)
+	if (pp % 16 <= 9)
 		return (pp % 16 + '0');
 	return (pp % 16 - 10 + 'a');
 }
 
-static char	*pointer_to_str(void *p)
+static void	putpointer_fd(void *p, int fd)
 {
 	char	*str;
 
 	str = ft_calloc(14,1);
-	if (str == NULL)
-		return (NULL);
+	//if (str == NULL)
+		//return (NULL); передать сюда строку
 	str[0] = '0';	
 	str[1] = 'x';
 	str[13] = to_char(((unsigned long)p & 0x00000000000f));
 	str[12] = to_char(((unsigned long)p & 0x0000000000f0) >> 4);
 	str[11] = to_char(((unsigned long)p & 0x000000000f00) >> 8);
 	str[10] = to_char(((unsigned long)p & 0x00000000f000) >> 12);
-	str[9]  = to_char(((unsigned long)p & 0x0000000f0000) >> 16);
-	str[8]  = to_char(((unsigned long)p & 0x000000f00000) >> 20);
-	str[7]  = to_char(((unsigned long)p & 0x00000f000000) >> 24);
-	str[6]  = to_char(((unsigned long)p & 0x0000f0000000) >> 28);
+	str[9] = to_char(((unsigned long)p & 0x0000000f0000) >> 16);
+	str[8] = to_char(((unsigned long)p & 0x000000f00000) >> 20);
+	str[7] = to_char(((unsigned long)p & 0x00000f000000) >> 24);
+	str[6] = to_char(((unsigned long)p & 0x0000f0000000) >> 28);
 	str[5] = to_char(((unsigned long)p & 0x000f00000000) >> 32);
 	str[4] = to_char(((unsigned long)p & 0x00f000000000) >> 36);
 	str[3] = to_char(((unsigned long)p & 0x0f0000000000) >> 40);
 	str[2] = to_char(((unsigned long)p & 0xf00000000000) >> 44);
-
-	return (str);
+	ft_putstr_fd(str, fd);
 }
 
-static void	ft_putpointer_fd(void *p, int fd)
+static void	put_unsigned_int_fd_rec(unsigned int n, int fd)
 {
-	//if ( == NULL)
-	ft_putstr_fd(pointer_to_str(p), fd);
+	char	c;
+
+	if (n == 0)
+		return ;
+	put_unsigned_int_fd_rec(n / 10, fd);
+	c = n - (n / 10) * 10 + '0';
+	write(fd, &c, 1);
+}
+
+static void	put_unsigned_int_fd(unsigned int n, int fd)
+{
+	if (n == 0)
+	{
+		write(fd, "0", 1);
+		return ;
+	}
+	put_unsigned_int_fd_rec(n, fd);
 }
 
 int	ft_printf(const char *s, ...)
@@ -80,19 +94,22 @@ int	ft_printf(const char *s, ...)
 	i = 0;
 	while (i < ft_strlen((char *)s))
 	{
-		if (ft_strncmp(&s[i],"%s",2) == 0)
+		if (ft_strncmp(&s[i], "%s", 2) == 0)
 			ft_putstr_fd(va_arg(list_args, char*), 1);
-		else if (ft_strncmp(&s[i],"%c",2) == 0)
+		else if (ft_strncmp(&s[i], "%c", 2) == 0)
 			ft_putchar_fd(va_arg(list_args, int), 1);
-		else if (ft_strncmp(&s[i],"%d",2) == 0)
+		else if (ft_strncmp(&s[i], "%p", 2) == 0)
+			putpointer_fd(va_arg(list_args, void*), 1);
+		else if (ft_strncmp(&s[i], "%d", 2) == 0)
 			ft_putnbr_fd(va_arg(list_args, int), 1);
-		else if (ft_strncmp(&s[i],"%p",2) == 0)
-			ft_putpointer_fd(va_arg(list_args, void*), 1);
+		else if (ft_strncmp(&s[i], "%i", 2) == 0)
+			ft_putnbr_fd(va_arg(list_args, int), 1);
+		else if (ft_strncmp(&s[i], "%u", 2) == 0)
+			put_unsigned_int_fd(va_arg(list_args, unsigned int), 1);
+		else if (ft_strncmp(&s[i], "%%", 2) == 0)
+			ft_putchar_fd('%', 1);
 		else
-		{
-			ft_putchar_fd(s[i], 1);
-			i--;
-		}
+			ft_putchar_fd(s[i--], 1);
 		i += 2;
 	}
 	va_end(list_args);
