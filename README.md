@@ -5,15 +5,7 @@ Solo, about 70 hours
 
 How to run:
 
-```$ cd submit/```
-
 ```$ make```
-
-```$ cd ..```
-
-```$ gcc main.c -L./workspace/ -lftprintf```
-
-```$ ./a.out```
 
 ----------------------------------------------------------
 Tester https://github.com/Tripouille/printfTester 
