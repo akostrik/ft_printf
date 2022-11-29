@@ -1,10 +1,10 @@
 workspace/*.o
 workspace/libft.a
 workspace/libftprintf.a
-tester/*
-tester
-workspace/tester/*
-workspace/tester
+workspace/tester_tripouille/*
+workspace/tester_tripouille
+workspace/pft
+workspace/pft/*
 workspace_to_submit
 workspace_to_submit/*
 a.out
