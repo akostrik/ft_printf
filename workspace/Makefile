@@ -6,14 +6,14 @@
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 13:57:13 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/29 19:07:10 by akostrik         ###   ########.fr        #
+#    Updated: 2022/11/29 21:10:03 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Le Makefile compile ftlib à l’aide de son Makefile, puis compiler le projet
 
 NAME    = libftprintf.a
-SRCS    = ft_printf.c put_int_base_16_fd.c
+SRCS    = ft_printf.c put_int_base_fd.c
 OBJS    = ${SRCS:.c=.o}
 HDRS    = .
 CFLAGS  = -Wall -Wextra -Werror
