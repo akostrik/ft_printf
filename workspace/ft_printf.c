@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:46:18 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/28 19:05:42 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/29 11:55:37 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,34 +33,35 @@
 // void* can't be dereferenced (it would give a value of type void)
 // void* : pointer arithmetic is not possible
 
-// 0x 56 12 21 0d a0 08
-
-/*static char	hex_digit_n_to_char(int n, void *p)
+static char	to_char(unsigned long pp)
 {
-
-}*/
+	if (pp % 16 < 10)
+		return (pp % 16 + '0');
+	return (pp % 16 - 10 + 'a');
+}
 
 static char	*pointer_to_str(void *p)
 {
 	char	*str;
 
-	printf("\np          = %p = %c\n",p,*(char*)p);
-	printf("sizeof( p) = sizeof(%p) = %zu\n",p,sizeof(p));
-	str = ft_calloc(14,1); // 16 ?
+	str = ft_calloc(14,1);
 	if (str == NULL)
 		return (NULL);
-	str[0] = '0';
+	str[0] = '0';	
 	str[1] = 'x';
-	str[2] = ft_itoa(((unsigned long)p & 0x00000000000f))[0];
-	str[3] = ft_itoa(((unsigned long)p & 0x0000000000f0) >> 4)[0];
-	str[4] = ft_itoa(((unsigned long)p & 0x000000000f00) >> 8)[0];
-	str[5] = ft_itoa(((unsigned long)p & 0x00000000f000) >> 12)[0];
-	str[6] = ft_itoa(((unsigned long)p & 0x0000000f0000) >> 16)[0];
-	str[7] = ft_itoa(((unsigned long)p & 0x000000f00000) >> 20)[0];
-	str[8] = ft_itoa(((unsigned long)p & 0x00000f000000) >> 24)[0];
-	str[9] = ft_itoa(((unsigned long)p & 0x0000f0000000) >> 28)[0];
-	//ft_memcpy(str+2, (char*)p, 12);
-	printf("\npointer_to_str returns %s\n",str);
+	str[13] = to_char(((unsigned long)p & 0x00000000000f));
+	str[12] = to_char(((unsigned long)p & 0x0000000000f0) >> 4);
+	str[11] = to_char(((unsigned long)p & 0x000000000f00) >> 8);
+	str[10] = to_char(((unsigned long)p & 0x00000000f000) >> 12);
+	str[9]  = to_char(((unsigned long)p & 0x0000000f0000) >> 16);
+	str[8]  = to_char(((unsigned long)p & 0x000000f00000) >> 20);
+	str[7]  = to_char(((unsigned long)p & 0x00000f000000) >> 24);
+	str[6]  = to_char(((unsigned long)p & 0x0000f0000000) >> 28);
+	str[5] = to_char(((unsigned long)p & 0x000f00000000) >> 32);
+	str[4] = to_char(((unsigned long)p & 0x00f000000000) >> 36);
+	str[3] = to_char(((unsigned long)p & 0x0f0000000000) >> 40);
+	str[2] = to_char(((unsigned long)p & 0xf00000000000) >> 44);
+
 	return (str);
 }
 
