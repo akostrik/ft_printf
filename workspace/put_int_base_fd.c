@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:51:51 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 21:59:23 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/29 22:52:02 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 ssize_t	putchar_(char c, int fd)
 {
+	//printf("\nputchar_ %c\n",c);
 	return (write(fd, &c, 1));
 }
 
@@ -37,17 +38,25 @@ static unsigned int	my_pow(unsigned int n, unsigned int k)
 	return (res);
 }
 
-ssize_t	put_unsigned_int_base(unsigned int n, size_t base, int fd, char x)
+ssize_t	put_unsigned_int_base(unsigned int n, size_t base, int fd, char low_or_upper)
 {
 	size_t	i;
 	size_t	k;
-	size_t	nb_digits;
-	int		digit;
+	size_t	nb_digits_base;
+	int		digit_as_int_10;
+	char	digit_as_char_base;
 	ssize_t	ret;
+	char 		c;
 
-	//printf("\nput_unsigned_int_base %d %zu\n",n,base);
-	if (n == 0)
-		return (putchar_('0', fd));
+	printf("\nput_unsigned_int_base %d %zu\n",n,base);
+	if (n == (unsigned int)0)
+	{
+		//printf("\nput zero\n");
+		//return (putchar_('0', fd));
+		write(fd, "put zero !", 10);
+		c = '0';
+		return (write(fd, &c, 1));
+	}
 	i = 0;
 	k = n;
 	while (k > 0)
@@ -55,24 +64,26 @@ ssize_t	put_unsigned_int_base(unsigned int n, size_t base, int fd, char x)
 		k = k / base;
 		i++;
 	}
-	nb_digits = i;
+	nb_digits_base = i;
 	i = 0;
 	ret = 0;
-	while (i < nb_digits)
+	while (i < nb_digits_base)
 	{
 		//printf("\ndigit = %d / %d\n",n,my_pow(base, nb_digits - i - 1));
-		digit = n / my_pow(base, nb_digits - i - 1);
-		//printf("digit = %d\n",digit);
-		if (digit % base <= 9)
-			ret += putchar_(digit % base + '0', 1);
-		else if (x == 'x')
-			ret += putchar_(digit % base - 10 + 'a', 1);
-		else if (x == 'X')
-			ret += putchar_(digit % base - 10 + 'A', 1);
-		n = n % my_pow(base, nb_digits - i - 1);
+		digit_as_int_10 = n / my_pow(base, nb_digits_base - i - 1);
+		if (digit_as_int_10 % base <= 9)
+			ret += putchar_(digit_as_int_10 % base + '0', 1);
+		else 
+		{
+			digit_as_char_base = digit_as_int_10 % base - 10 + 'a';
+			if (low_or_upper == 'X')
+				digit_as_char_base = ft_toupper(digit_as_char_base);
+			ret += putchar_(digit_as_char_base, 1);
+		}
+		n = n % my_pow(base, nb_digits_base - i - 1);
 		i++;
-	}
-	//printf("\nret = %zd\n",ret);
+		printf("* i = %zu, digit_as_int = %d, ret = %zd\n",i,digit_as_int_10,ret);
+}
 	return (ret);
 }
 
@@ -80,8 +91,6 @@ ssize_t	put_int_base_10(int n, int fd)
 {
 	size_t ret;
 
-	if (n == 0)
-		return (putchar_('0', fd));
 	if (n == INT_MIN)
 		return (putstr("-2147483648", 1));
 	ret = 0;

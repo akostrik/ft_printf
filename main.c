@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 22:02:56 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/29 22:41:09 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 int main(void)
 {
 	size_t a;
+	/*
 	char *str = "ABCD";
 
 	a =    printf("str %s",str);
@@ -110,105 +111,134 @@ int main(void)
 // unsigned decimal number 16 bit %u 0 ... UINT_MAX
 	unsigned int	un = 12;
 	a =    printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\n",a);
-	a =    printf("int              %%i = %i",n);
-	printf("\t\t\t\treturns %zu\n",a);
+	printf("\t\t\treturns %zu\t // 12\n",a);
 	a = ft_printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\n",a);
+	printf("\t\t\treturns %zu\n\n",a);
+
+	un = 12;
+	a =    printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\t // 12\n",a);
 	a = ft_printf("int              %%i = %i",n);
-	printf("\t\t\t\treturns %zu\n\n",a);
+	printf("\t\treturns %zu\n\n",a);
 
 	un = 0;
 	a =   printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\n",a);
-	a =   printf("int              %%i = %i",n);
-	printf("\t\t\t\treturns %zu\n",a);
+	printf("\t\t\t\treturns %zu\t // 0\n",a);
 	a = ft_printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\n",a);
-	a = ft_printf("int              %%i = %i",n);
 	printf("\t\t\t\treturns %zu\n\n",a);
+
+	un = 0;
+	a =   printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\t // 0\n",a);
+	a = ft_printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\n\n",a);
 
 	un = INT_MAX;
 	a =   printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\treturns %zu\t// INT_MAX\n",a);
-	a =   printf("int              %%i = %i",n);
-	printf("\t\t\treturns %zu\n",a);
+	printf("\t\treturns %zu\t// INT_MAX\n",a);
 	a =  ft_printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\treturns %zu\n",a);
-	a = ft_printf("int base 10 %%i = %i",n);
-	printf("\t\t\treturns %zu\n\n",a);
+	printf("\t\treturns %zu\n\n",a);
+
+	un = INT_MAX;
+	a =   printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\t// INT_MAX\n",a);
+	a = ft_printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\n\n",a);
 
 	un = -1;
 	a =   printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\treturns %zu\t// -1\n",a);
-	a =   printf("int base 10 %%i = %i",n);
-	printf("\t\t\treturns %zu\n",a);
+	printf("\t\treturns %zu\t// -1\n",a);
 	a = ft_printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\treturns %zu\n",a);
-	a = ft_printf("int base 10 %%i = %i",n);
-	printf("\t\t\treturns %zu\n\n",a);
+	printf("\t\treturns %zu\n\n",a);
+
+	un = -1;
+	a =   printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\t// -1\n",a);
+	a = ft_printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\n\n",a);
 
 	un = UINT_MAX;
 	a =   printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\treturns %zu\t// UINT_MAX\n",a);
-	a =   printf("int base 10 %%i = %i",n);
-	printf("\t\t\treturns %zu\n",a);
+	printf("\t\treturns %zu\t// UINT_MAX\n",a);
 	a = ft_printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\treturns %zu\n",a);
-	a = ft_printf("int base 10 %%i = %i",n);
-	printf("\t\t\treturns %zu\n\n",a);
+	printf("\t\treturns %zu\n\n",a);
+
+	un = UINT_MAX;
+	a =   printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\t// UINT_MAX\n",a);
+	a = ft_printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\n\n",a);
 
 	un = UINT_MAX + 1;
-	a =   printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\t\t\t// UINT_MAX + 1\n",a);
-	a =   printf("int base 10 %%i = %i",n);
-	printf("\t\t\t\treturns %zu\n",a);
+	a =    printf("unsigned decimal %%u = %u",un);
+	printf("\t\t\t\treturns %zu\t// UINT_MAX + 1\n",a);
 	a = ft_printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\n",a);
-	a = ft_printf("int base 10 %%i = %i",n);
+	printf("\t\t\t\treturns %zu\n\n",a);
+
+	un = UINT_MAX + 1;
+	a =    printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\t// UINT_MAX + 1\n",a);
+	a = ft_printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\n\n",a);
+
+	un = UINT_MAX + 2;
+	a =    printf("unsigned decimal %%u = %u",un);
+	printf("\t\t\t\treturns %zu\t// UINT_MAX + 2\n",a);
+	a = ft_printf("unsigned decimal %%u = %u",un);
 	printf("\t\t\t\treturns %zu\n\n",a);
 
 	un = UINT_MAX + 2;
-	a =   printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\t\t\t// UINT_MAX + 2\n",a);
-	a =   printf("int base 10 %%i = %i",n);
-	printf("\t\t\t\treturns %zu\n",a);
-	a = ft_printf("unsigned decimal %%u = %u",un);
-	printf("\t\t\t\treturns %zu\n",a);
-	a = ft_printf("int base 10 %%i = %i",n);
-	printf("\t\t\t\treturns %zu\n\n",a);
-	/*
+	a =    printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\t// UINT_MAX + 2\n",a);
+	a = ft_printf("int              %%i = %i",n);
+	printf("\t\treturns %zu\n\n",a);
+
 // unsigned int %u x 0 ... UINT_MAX
 	unsigned int	x = 12;
-	a =   printf("unsigned decimal %%x = %x\t\t\t// %d\n",x,x);
-	a = ft_printf("unsigned decimal %%x = %x\n\n",x);
+	a =   printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\t\treturns %zu\t// %d\n",a,x);
+	a = ft_printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\t\treturns %zu\n\n",a);
 
 	x = -1;
-	a =   printf("unsigned decimal %%x = %x\t\t// %d\n",x,x);
-	a = ft_printf("unsigned decimal %%x = %x\n\n",x);
+	a =   printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\t// %d\n",a,x);
+	a = ft_printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\n\n",a);
 
 	x = -2;
-	a =   printf("unsigned decimal %%x = %x\t\t// %d\n",x,x);
-	a = ft_printf("unsigned decimal %%x = %x\n\n",x);
+	a =   printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\t// %d\n",a,x);
+	a = ft_printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\n\n",a);
 
 	x = 255;
-	a =   printf("unsigned decimal %%x = %x\t\t// %d\n",x,x);
-	a = ft_printf("unsigned decimal %%x = %x\n\n",x);
-
-	x = 0;
-	a =   printf("unsigned decimal %%x = %x\n",x);
-	a = ft_printf("unsigned decimal %%x = %x\n\n",x);
-
+	a =   printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\t// %d\n",a,x);
+	a = ft_printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\n\n",a);
+*/
+	unsigned int x = 0;
+	a =   printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\t\treturns %zu\t// %d\n",a,x);
+	a = ft_printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\t\treturns %zu\n\n",a);
+/*
 	x = UINT_MAX;
-	a =   printf("unsigned decimal %%x = %x\t\t// UINT_MAX\n",x);
-	a = ft_printf("unsigned decimal %%x = %x\n\n",x);
+	a =   printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\t// UINT_MAX\n",a);
+	a = ft_printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\n\n",a);
 
 	x = UINT_MAX + 1;
-	a =   printf("unsigned decimal %%x = %x\t\t\t// UINT_MAX + 1\n",x);
-	a = ft_printf("unsigned decimal %%x = %x\n\n",x);
+	a =   printf("unsigned decimal %%x = %x\t\t\t",x);
+	printf("\treturns %zu\t// UINT_MAX + 1\n",a);
+	a = ft_printf("unsigned decimal %%x = %x",x);
+	printf("\t\t\treturns %zu\n\n",a);
 
 	x = UINT_MAX;
-	a =   printf("unsigned decimal %%X = %X\t\t// UINT_MAX\n",x);
-	a = ft_printf("unsigned decimal %%X = %X\n\n",x);
-	*/
+	a =   printf("unsigned decimal %%X = %X\t\t",x);
+	printf("\treturns %zu\t// UINT_MAX\n",a);
+	a = ft_printf("unsigned decimal %%X = %X",x);
+	printf("\t\t\treturns %zu\n\n",a);*/
 }
