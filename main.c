@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 13:17:43 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/29 15:11:44 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,4 +94,37 @@ int main(void)
 	un = UINT_MAX + 2;
 	   printf("unsigned decimal %%u = %u\t\t\t// UINT_MAX + 2\n",un);
 	ft_printf("unsigned decimal %%u = %u\n\n",un);
+
+// unsigned int %u x 0 ... UINT_MAX
+	unsigned int	x = 12;
+	   printf("unsigned decimal %%x = %x\t\t\t// %d\n",x,x);
+	ft_printf("unsigned decimal %%x = %x\n\n",x);
+
+	x = -1;
+	   printf("unsigned decimal %%x = %x\t\t// %d\n",x,x);
+	ft_printf("unsigned decimal %%x = %x\n\n",x);
+
+	x = -2;
+	   printf("unsigned decimal %%x = %x\t\t// %d\n",x,x);
+	ft_printf("unsigned decimal %%x = %x\n\n",x);
+
+	x = 255;
+	   printf("unsigned decimal %%x = %x\t\t// %d\n",x,x);
+	ft_printf("unsigned decimal %%x = %x\n\n",x);
+
+	x = 0;
+	   printf("unsigned decimal %%x = %x\n",x);
+	ft_printf("unsigned decimal %%x = %x\n\n",x);
+
+	x = UINT_MAX;
+	   printf("unsigned decimal %%x = %x\t\t// UINT_MAX\n",x);
+	ft_printf("unsigned decimal %%x = %x\n\n",x);
+
+	x = UINT_MAX + 1;
+	   printf("unsigned decimal %%x = %x\t\t\t// UINT_MAX + 1\n",x);
+	ft_printf("unsigned decimal %%x = %x\n\n",x);
+
+	x = UINT_MAX;
+	   printf("unsigned decimal %%X = %X\t\t// UINT_MAX\n",x);
+	ft_printf("unsigned decimal %%X = %X\n\n",x);
 }
