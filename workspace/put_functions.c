@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:51:51 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/30 12:32:52 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/30 23:31:32 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ ssize_t	putchar_(char c, int fd)
 
 ssize_t	putstr(char *s, int fd)
 {
+	if (s == NULL)
+		return (write(fd, "(null)", ft_strlen("(null)")));
 	return (write(fd, s, ft_strlen(s)));
 }
 
