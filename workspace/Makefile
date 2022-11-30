@@ -6,7 +6,7 @@
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 13:57:13 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/30 12:49:12 by akostrik         ###   ########.fr        #
+#    Updated: 2022/11/30 23:23:44 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS    = ${SRCS:.c=.o}
 HDRS    = .
 CFLAGS  = -Wall -Wextra -Werror
 LIBFT   = libft.a
-CC      = gcc
+CC      = cc
 
 all: ${NAME}
 
@@ -26,7 +26,8 @@ ${NAME}: ${LIBFT} ${OBJS}
 	ar rc ${NAME} ${OBJS} 
 
 %.o: %.c 
-	${CC} ${CFLAGS} -c -o $@ $< -L./libft -lft 
+#	${CC} ${CFLAGS} -c -o $@ $< -L./libft -lft
+	${CC} ${CFLAGS} -c -o $@ $< 
 
 clean:
 	rm -f ${OBJS}
@@ -40,12 +41,8 @@ fclean: clean
 re: fclean all
 
 ${LIBFT}:
-	(cd libft && make)
+	make -C libft 
+	cp libft/$(LIBFT) $(NAME)
+#	(cd libft && make) # 2 stroki pomenial
 
 .PHONY: all clean fclean re
-
-# cc -Wall -Wextra -Werror -c -o ft_printf.o ft_printf.c -L./libft -lft 
-# clang: error: -lft: 'linker' input unused [-Werror,-Wunused-command-line-argument]
-
-# gcc -Wall -Wextra -Werror -c -o ft_printf.o ft_printf.c -L./libft -lft 
-# OK

@@ -6,11 +6,11 @@
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:32:35 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/30 12:49:02 by akostrik         ###   ########.fr        #
+#    Updated: 2022/11/30 23:20:35 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = gcc
+CC = cc
 
 all:
 	clear
