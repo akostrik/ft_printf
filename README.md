@@ -29,9 +29,7 @@ basic test:
         
      You can rerun this test with sh test 28
      
-     The function was called like this:
-     
-   ft_printf("%s", null_str);
+     The function was called like this: ft_printf("%s", null_str);
 
   29.KO (Wrong output) (Wrong return)
   
@@ -41,9 +39,7 @@ basic test:
         
      You can rerun this test with sh test 29
      
-     The function was called like this:
-     
-   ft_printf("%s everywhere", null_str);
+     The function was called like this: ft_printf("%s everywhere", null_str);
 
   30.KO (Wrong output) (Wrong return)
   
@@ -53,9 +49,7 @@ basic test:
         
      You can rerun this test with sh test 30
      
-     The function was called like this:
-     
-   ft_printf("everywhere %s", null_str);
+     The function was called like this: ft_printf("everywhere %s", null_str);
    
 31.OK 32.OK 33.OK 
 
@@ -99,9 +93,7 @@ mix:
         
      You can rerun this test with sh test 100
      
-     The function was called like this:
-     
-   ft_printf("%c - %s - %p %d - %i - %u - %x %X %%", 'b', null_str, ((void*)0), 20, -20, -1, -1, 200000000);
+     The function was called like this: ft_printf("%c - %s - %p %d - %i - %u - %x %X %%", 'b', null_str, ((void*)0), 20, -20, -1, -1, 200000000);
 
   101.KO (Wrong output) (Wrong return)
   
@@ -111,9 +103,7 @@ mix:
         
      You can rerun this test with sh test 101
      
-     The function was called like this:
-     
-   ft_printf("%c %s - %p - %d - %i %u - %x - %X %%", '\0', null_str, (void *)0xdeadc0de, 0, (int)-2147483648, -1, -1, 200000000);
+     The function was called like this: ft_printf("%c %s - %p - %d - %i %u - %x - %X %%", '\0', null_str, (void *)0xdeadc0de, 0, (int)-2147483648, -1, -1, 200000000);
 
 ----------------------------------------------------------
 Tester https://github.com/Tripouille/printfTester 
