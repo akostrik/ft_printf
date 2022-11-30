@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 23:52:43 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/30 12:31:21 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,22 @@ int main(void)
 	a = ft_printf("str\t\t %s",str);
 	printf("\t\t\t\treturns %zu\n\n",a);
 
+	str = "";
+	a =    printf("str\t\t [%s]",str);
+	printf("\t\t\t\treturns %zu\n",a);
+	a = ft_printf("str\t\t [%s]",str);
+	printf("\t\t\t\treturns %zu\n\n",a);
+
 	char c = 'A';
 	a =   printf("char\t\t %c",c);
 	printf("\t\t\t\treturns %zu\n",a);
 	a = ft_printf("char\t\t %c",c);
+	printf("\t\t\t\treturns %zu\n\n",a);
+
+	c = 0;
+	a =   printf("char\t\t [%c]",c);
+	printf("\t\t\t\treturns %zu\n",a);
+	a = ft_printf("char\t\t [%c]",c);
 	printf("\t\t\t\treturns %zu\n\n",a);
 
 	void *p = (void *)(&c);
@@ -34,6 +46,11 @@ int main(void)
 	a = ft_printf("pointer\t\t %p",p);
 	printf("\t\t\treturns %zu\n\n",a);
 
+	p = NULL;
+	a =   printf("pointer\t\t %p",p);
+	printf("\t\t\t\treturns %zu\n",a);
+	a = ft_printf("pointer\t\t %p",p);
+	printf("\t\t\t\treturns %zu\n\n",a);
 
 	// decimal number  16 bit %d INT_MIN ... INT_MAX
 	// integer base 10 16 bit %i INT_MIN ... INT_MAX

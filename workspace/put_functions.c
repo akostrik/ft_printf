@@ -6,39 +6,44 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:51:51 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/30 11:44:56 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/30 12:32:52 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-ssize_t	put_uns_long_base(unsigned long n, size_t base, char uppercase, int fd)
+ssize_t	putchar_(char c, int fd)
 {
-	size_t	i;
-	size_t	nb_digits;
-	int		digit_as_int_10;
-	char	digit_as_char_base;
-	ssize_t	ret;
+	return (write(fd, &c, 1));
+}
+
+ssize_t	putstr(char *s, int fd)
+{
+	return (write(fd, s, ft_strlen(s)));
+}
+
+ssize_t	put_unsign_long(unsigned long n, size_t base, char uppercase, int fd)
+{
+	unsigned long	auxiliary;
+	ssize_t			ret;
+	int				digit_as_int_10;
+	char			digit_as_char;
 
 	if (n == 0)
 		return (putchar_('0', fd));
-	nb_digits = calc_nb_digits(n, base);
-	i = 0;
+	auxiliary = pow_(base, calc_nb_digits(n, base) - 1);
 	ret = 0;
-	while (i < nb_digits)
+	while (auxiliary > 0)
 	{
-		digit_as_int_10 = n / pow_(base, nb_digits - i - 1);
-		if (digit_as_int_10 % base <= 9)
-			ret += putchar_(digit_as_int_10 % base + '0', 1);
-		else
-		{
-			digit_as_char_base = digit_as_int_10 % base - 10 + 'a';
-			if (uppercase == 'X')
-				digit_as_char_base = ft_toupper(digit_as_char_base);
-			ret += putchar_(digit_as_char_base, 1);
-		}
-		n = n % pow_(base, nb_digits - i - 1);
-		i++;
+		digit_as_int_10 = n / auxiliary;
+		digit_as_char = digit_as_int_10 % base + '0';
+		if (digit_as_int_10 % base >= 10)
+			digit_as_char = digit_as_int_10 % base - 10 + 'a';
+		if (uppercase == 'X')
+			digit_as_char = ft_toupper(digit_as_char);
+		ret += putchar_(digit_as_char, 1);
+		n = n % auxiliary;
+		auxiliary = auxiliary / base;
 	}
 	return (ret);
 }
@@ -57,7 +62,7 @@ ssize_t	put_int_base_10(int n, int fd)
 		n = -n;
 		ret ++;
 	}
-	ret += put_uns_long_base((unsigned int)n, 10, 'x', fd);
+	ret += put_unsign_long((unsigned int)n, 10, 'x', fd);
 	return (ret);
 }
 
@@ -66,10 +71,14 @@ ssize_t	put_pointer(void *p, int fd)
 	ssize_t	ret1;
 	ssize_t	ret2;
 
+	if (p == NULL)
+	{
+		return (putstr("(nil)", fd));
+	}
 	ret1 = putstr("0x", fd);
 	if (ret1 == -1)
 		return (-1);
-	ret2 = put_uns_long_base((unsigned long)(p), 16, 'x', fd);
+	ret2 = put_unsign_long((unsigned long)(p), 16, 'x', fd);
 	if (ret2 == -1)
 		return (-1);
 	return (ret1 + ret2);
