@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 12:24:00 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 23:56:57 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:45:29 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,5 +26,6 @@ ssize_t	put_int_base_10(int n, int fd);
 ssize_t	putchar_(char c, int fd);
 ssize_t	putstr(char *s, int fd);
 unsigned long	pow_(unsigned long n, unsigned long k);
+int	calc_nb_digits(unsigned long n, size_t base);
 
 #endif

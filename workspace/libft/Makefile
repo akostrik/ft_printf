@@ -6,7 +6,7 @@
 #    By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/17 14:32:35 by akostrik          #+#    #+#              #
-#    Updated: 2022/11/29 20:19:54 by akostrik         ###   ########.fr        #
+#    Updated: 2022/11/30 11:31:16 by akostrik         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ CC      = gcc
 all: ${NAME}
 
 ${NAME}: ${OBJS} 
+	ar rc ${NAME} ${OBJS}
 
 %.o: %.c 
 	${CC} -c ${CFLAGS} -o $@ $<

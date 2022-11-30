@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   put_int_base_fd.c                                  :+:      :+:    :+:   */
+/*   put_functions.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/16 14:51:51 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/29 23:53:38 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/30 11:44:56 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,19 @@
 ssize_t	put_uns_long_base(unsigned long n, size_t base, char uppercase, int fd)
 {
 	size_t	i;
-	unsigned long	k;
-	size_t	nb_digits_base;
+	size_t	nb_digits;
 	int		digit_as_int_10;
 	char	digit_as_char_base;
 	ssize_t	ret;
 
 	if (n == 0)
 		return (putchar_('0', fd));
-	i = 0;
-	k = n;
-	while (k > 0)
-	{
-		k = k / base;
-		i++;
-	}
-	nb_digits_base = i;
+	nb_digits = calc_nb_digits(n, base);
 	i = 0;
 	ret = 0;
-	while (i < nb_digits_base)
+	while (i < nb_digits)
 	{
-		digit_as_int_10 = n / pow_(base, nb_digits_base - i - 1);
+		digit_as_int_10 = n / pow_(base, nb_digits - i - 1);
 		if (digit_as_int_10 % base <= 9)
 			ret += putchar_(digit_as_int_10 % base + '0', 1);
 		else
@@ -45,7 +37,7 @@ ssize_t	put_uns_long_base(unsigned long n, size_t base, char uppercase, int fd)
 				digit_as_char_base = ft_toupper(digit_as_char_base);
 			ret += putchar_(digit_as_char_base, 1);
 		}
-		n = n % pow_(base, nb_digits_base - i - 1);
+		n = n % pow_(base, nb_digits - i - 1);
 		i++;
 	}
 	return (ret);
@@ -53,7 +45,7 @@ ssize_t	put_uns_long_base(unsigned long n, size_t base, char uppercase, int fd)
 
 ssize_t	put_int_base_10(int n, int fd)
 {
-	size_t	ret;
+	ssize_t	ret;
 
 	if (n == INT_MIN)
 		return (putstr("-2147483648", 1));
@@ -67,6 +59,20 @@ ssize_t	put_int_base_10(int n, int fd)
 	}
 	ret += put_uns_long_base((unsigned int)n, 10, 'x', fd);
 	return (ret);
+}
+
+ssize_t	put_pointer(void *p, int fd)
+{
+	ssize_t	ret1;
+	ssize_t	ret2;
+
+	ret1 = putstr("0x", fd);
+	if (ret1 == -1)
+		return (-1);
+	ret2 = put_uns_long_base((unsigned long)(p), 16, 'x', fd);
+	if (ret2 == -1)
+		return (-1);
+	return (ret1 + ret2);
 }
 
 /*
