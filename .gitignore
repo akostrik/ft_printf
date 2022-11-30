@@ -3,6 +3,8 @@ workspace/libft.a
 workspace/libftprintf.a
 workspace/tester_tripouille/*
 workspace/tester_tripouille
+workspace/tester_tripiouille/*
+workspace/tester_tripiouille
 workspace/pft
 workspace/pft/*
 workspace_to_submit
