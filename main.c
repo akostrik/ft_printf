@@ -6,7 +6,7 @@
 /*   By: akostrik <akostrik@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/17 13:57:16 by akostrik          #+#    #+#             */
-/*   Updated: 2022/11/30 13:06:17 by akostrik         ###   ########.fr       */
+/*   Updated: 2022/11/30 23:33:30 by akostrik         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ int main(void)
 	a = ft_printf("str\t\t [%s]",str);
 	printf("\t\t\t\treturns %zu\n\n",a);
 
+	str = "";
+	char *null_str = NULL;
+	a =    printf("str\t\t [%s]",null_str);
+	printf("\t\t\treturns %zu\n",a);
+	a = ft_printf("str\t\t [%s]",null_str);
+	printf("\t\t\treturns %zu\n\n",a);
+
+	/////////////////////////////////////////////
 	char c = 'A';
 	a =   printf("char\t\t %c",c);
 	printf("\t\t\t\treturns %zu\n",a);
