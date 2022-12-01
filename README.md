@@ -27,7 +27,7 @@ basic test: 1.OK
 
 %X basic: 79.OK 80.OK 81.OK 82.OK 83.OK 84.OK 85.OK 86.OK 87.OK 88.OK 89.OK 
 
-%% basic: 90.OK 91.OK 92.OK 93.OK 94.OK 95.OK 
+%% basic: 90.OK 91.OK 92.OK 93.OK 94.OK 95.OK
 
 mix:      96.OK 97.OK 98.OK 99.OK 100.OK 101.OK 
 ----------------------------------------------------------
