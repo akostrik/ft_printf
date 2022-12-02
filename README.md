@@ -6,6 +6,7 @@ Solo, about 70 hours
 How to run:
 
 $ make
+
 --------------------------------------------------------
 Tester https://github.com/paulo-santana/ft_printf_tester
 
@@ -44,7 +45,7 @@ You have been graded 100 on ft_printf:
 
 test_spdxiucpercent: 8/8 correct functions
 
-nonus_one: KO 
+bonus_one: KO 
 
 bonus_two: KO
 
