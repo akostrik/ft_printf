@@ -41,9 +41,7 @@ Tester https://github.com/gavinfielder/pft
 --------------------------------------------------------
 Moulinette
 
-You have been graded 100 on ft_printf:
-
-test_spdxiucpercent: 8/8 correct functions
+You have been graded 100 on ft_printf: test_spdxiucpercent: 8/8 correct functions
 
 bonus_one: KO 
 
