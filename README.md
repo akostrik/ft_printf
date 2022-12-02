@@ -5,7 +5,7 @@ Solo, about 70 hours
 
 How to run:
 
-```$ make```
+$ make
 --------------------------------------------------------
 Tester https://github.com/paulo-santana/ft_printf_tester
 
@@ -36,3 +36,15 @@ Tester https://github.com/Tripouille/printfTester
 
 ---------------------------------------------------------
 Tester https://github.com/gavinfielder/pft
+
+--------------------------------------------------------
+Moulinette
+
+You have been graded 100 on ft_printf:
+
+test_spdxiucpercent: 8/8 correct functions
+
+nonus_one: KO 
+
+bonus_two: KO
+
